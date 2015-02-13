@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 class Tesseract3Box:
 
     text = u''
@@ -6,7 +8,8 @@ class Tesseract3Box:
     right = None
     top = None
     bottom = None
-
+    height = None
+    width = None
     page = None
 
     valid = False
@@ -40,7 +43,8 @@ class Tesseract3Box:
                 self.bottom = int(fields[2])
                 self.right = int(fields[3])
                 self.top = int(fields[4])
-
+                self.height = abs(self.top - self.bottom)
+                self.width = abs(self.right - self.left)
                 self.page = int(fields[5])
 
                 self.text = fields[0]

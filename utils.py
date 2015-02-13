@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from Tesseract3Box import Tesseract3Box
 import codecs
 
