@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-
 
 from utils import *
-import cv2, sys, codecs, os
-
+import sys, codecs, os
+try:
+    import cv2x
+except:
+    pass
+    
 
 
 class Tesseract3BoxFile:
@@ -17,12 +21,12 @@ class Tesseract3BoxFile:
         self.filename=filename
         self.boxes=parse_boxfile(filename)
         self.imgfile="%s.tif" % (filename[:-4])
-        print "reading %s" % (self.imgfile)
-        self.img=cv2.imread(self.imgfile)
         try:
+            #print "reading %s" % (self.imgfile)
             img=cv2.imread(self.imgfile)
         except:
             pass
+            #print "reading %s failed..." % (self.imgfile)
         self.writdir=self.getDirection()
         
     def getDirection(self):
@@ -55,7 +59,7 @@ class Tesseract3BoxFile:
                 l=(box.bottom / 10) * 10
             if l < lastl:
                 f.write("\n")
-                f.write("# l, lastl %d %d\n" % (l, lastl)), 
+                #f.write("# l, lastl %d %d\n" % (l, lastl)), 
             lastl = l
             f.write(box.text)
         f.write("\n")
